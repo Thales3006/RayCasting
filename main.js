@@ -4,28 +4,30 @@ let h_border = canvas.height;
 let w_border = canvas.width;
 
 //inicial settings
-context.fillStyle = "rgb(255,255,255)";
-context.fillRect(0,0,w_border,h_border);
 
 let teclado=[]; teclas();
 let frames=16;
 let fov=90;
-const movTela= 544;
+let res=1;
+const movTelaX= 0;
+const movTelaY= 0;
+const RESIZE= 32;
 
 let blocks = createMap();
-let p1 = new player(12,12,24,24);
-
+let p1 = new player(12,12,24,24,"yellow");
+//let p2 = new player(8,12,32,32, "red");
 
 setInterval(function(){
     clear();
     drawInGrid(blocks);
     draw(p1);
-    drawdir();
+    //draw(p2);
     
     movimento(p1);
+    //movimento(p2);
     
     skyground();
-    rayCasting();
+    rayCasting(p1);
 }, frames);
 
 document.addEventListener('keydown', (event) => {
