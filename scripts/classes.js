@@ -16,10 +16,3 @@ class player extends obj{
     torque = 2*A;
     vel = 0.1;
 }
-
-class block extends obj{
-    constructor(x, y, texture){
-        super(x,y);
-        this.texture = texture;
-    }
-}

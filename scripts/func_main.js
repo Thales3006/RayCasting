@@ -35,6 +35,14 @@ function createMap(){
     return array
 }
 
+function SetImage(img, endereco){
+    img.onload = function() {
+        img.width= this.width;
+        img.height= this.height;
+    };
+    img.src = endereco;
+}
+
 function teclas(){
     teclado["a"]=false;
     teclado["w"]=false;

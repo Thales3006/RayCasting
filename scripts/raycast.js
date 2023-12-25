@@ -77,19 +77,32 @@ function Draw_lines(ray, p, x, y, Llenght, width, height, i){
     //let dist = (ray.x - p.x+p.larg/2) * Math.cos(p.ang) + (ray.y - p.y+p.alt/2) * Math.sin(p.ang);
     let cor = 255/(dist);
     let tam = height / dist;
+    let imgOffSet;
+    if(ray.x-Math.floor(ray.x)==0){
+        imgOffSet = ray.y-Math.floor(ray.y);
+    }
+    else{
+        imgOffSet = ray.x-Math.floor(ray.x);
+    }
+
+
     if(cor>200)cor=200;
     if(cor<0)cor=0;
-    context.fillStyle="rgb("+ (ray.x*16) +"," + cor +","+ (ray.y*16) +")";
-    if(height > tam)
-        context.fillRect(x+i*Llenght, y+ height/2-tam/2, Llenght - sobra, tam);
-    else
-        context.fillRect(x+i*Llenght, y, Llenght - sobra, height); 
+    context.fillStyle="rgb("+ cor +"," + cor +","+ cor +")";
+
+        //if(height > tam)
+            context.drawImage(textura, Math.floor(imgOffSet*textura.width),0, res,textura.height, x+i*Llenght,y+ height/2-tam/2, Llenght-sobra,tam);
+            //context.fillRect(x+i*Llenght, y+ height/2-tam/2, Llenght - sobra, tam);
+        //else
+            //context.drawImage(textura,   imgOffSet*w_img, h_img/2-dist*height/2,   w_img/100, dist*height,   x+i*Llenght, y,   Llenght - sobra, height);
+            //context.fillRect(x+i*Llenght, y, Llenght - sobra, height); 
 }
 
 function skyground(x, y, width, height){
-    context.fillStyle="rgb(0,30,50)";
+    context.fillStyle="rgb(150, 117, 59)";//chao
     context.fillRect(x, y + height/2, width, height/2);
-    context.fillStyle="rgb(50,0,100)";
+
+    context.fillStyle="rgb(79, 73, 70)";//ceu
     context.fillRect(x, y, width, height/2);
 }
 

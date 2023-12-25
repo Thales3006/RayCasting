@@ -13,10 +13,12 @@ let frames=16;
 let fov= 90*A;
 let res=1;
 
-
 let blocks = createMap();
 let p1 = new player(12,12,24,24,"yellow");
 //let p2 = new player(8,12,32,32, "red");
+
+let textura = new Image();
+SetImage(textura, "./imgs/parede.bmp")
 
 setInterval(function(){
     clear();
@@ -35,8 +37,6 @@ document.addEventListener('keydown', (event) => {
 
     if(event.key=="o")fov += A;
     else if(event.key=="p")fov -= A;
-    console.log("FOV:"+fov)
-    console.log("RES:"+res)
 
     if(event.key=="k")res += 1;
     else if(event.key=="l")if(res>1)res -= 1;
