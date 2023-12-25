@@ -12,7 +12,14 @@ class player extends obj{
         this.alt=alt/32;
         this.cor=cor;
     }
-    ang=0;
-    torque=2;
-    vel=0.1;
+    ang = 0;
+    torque = 2*A;
+    vel = 0.1;
+}
+
+class block extends obj{
+    constructor(x, y, texture){
+        super(x,y);
+        this.texture = texture;
+    }
 }

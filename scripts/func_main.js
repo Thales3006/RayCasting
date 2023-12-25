@@ -68,13 +68,13 @@ function clear(){
 function drawdir(p){
     context.fillStyle="red"
     context.fillRect(
-        (p.x+p.larg/2-5/RESIZE)*RESIZE+Math.cos((p.ang*Math.PI)/180)*15,
-        (p.y+p.alt/2-5/RESIZE)*RESIZE+Math.sin((p.ang*Math.PI)/180)*15,
+        (p.x+p.larg/2-5/RESIZE)*RESIZE+Math.cos(p.ang)*15,
+        (p.y+p.alt/2-5/RESIZE)*RESIZE+Math.sin(p.ang)*15,
         10,10);
         context.fillStyle="pink"
         context.fillRect(
-            (p.x+p.larg/2)*RESIZE+Math.cos((p.ang*Math.PI)/180)*30,
-            (p.y+p.alt/2)*RESIZE+Math.sin((p.ang*Math.PI)/180)*30,
+            (p.x+p.larg/2)*RESIZE+Math.cos(p.ang)*30,
+            (p.y+p.alt/2)*RESIZE+Math.sin(p.ang)*30,
             1,1);
 }
 
@@ -84,34 +84,42 @@ function movimento(movel){
     
     if(teclado["a"]||teclado["A"]){
         movel.ang-=movel.torque;
-        if(movel.ang<0)movel.ang+=360;
+
+        if(movel.ang<0) movel.ang += Math.PI*2;
     }
+
     if(teclado["d"]||teclado["D"]){
         movel.ang+=movel.torque;
-        if(movel.ang>=360)movel.ang=movel.ang%360;
+
+        if(movel.ang>=Math.PI*2) movel.ang = movel.ang % (Math.PI*2);
     }
+
     if(teclado["s"]||teclado["S"]){
-        movel.x-= movel.vel*Math.cos((movel.ang*Math.PI)/180);
+        movel.x-= movel.vel*Math.cos(movel.ang);
+
         if((i=colisao(movel,blocks))!=-1){
             movel.x=x;
-            movel.x+=dist(movel.x,movel.larg,blocks[i].x,1);
+            movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
         }
-        movel.y-= movel.vel*Math.sin((movel.ang*Math.PI)/180);
+        movel.y-= movel.vel*Math.sin(movel.ang);
         if((i=colisao(movel,blocks))!=-1){
-            movel.y=y;
-            movel.y+=dist(movel.y,movel.alt,blocks[i].y,1);
+            movel.y = y;
+            movel.y += dist(movel.y, movel.alt, blocks[i].y, 1);
         }
+
     }
+
     if(teclado["w"]||teclado["W"]){
-        movel.x+= movel.vel*Math.cos((movel.ang*Math.PI)/180);
+        movel.x += movel.vel*Math.cos(movel.ang);
+
         if((i=colisao(movel,blocks))!=-1){
-            movel.x=x;
-            movel.x+=dist(movel.x,movel.larg,blocks[i].x,1);
+            movel.x = x;
+            movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
         }
-        movel.y+= movel.vel*Math.sin((movel.ang*Math.PI)/180);
+        movel.y += movel.vel*Math.sin(movel.ang);
         if((i=colisao(movel,blocks))!=-1){
-            movel.y=y;
-            movel.y+=dist(movel.y,movel.alt,blocks[i].y,1);
+            movel.y = y;
+            movel.y += dist(movel.y, movel.alt, blocks[i].y, 1);
         }
     }
 }
