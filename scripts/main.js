@@ -10,36 +10,49 @@ const A = Math.PI/180;
 
 let teclado=[]; teclas();
 let frames=16;
+
 let fov= 90*A;
 let res=1;
 
 let blocks = createMap();
-let p1 = new player(12,12,24,24,"yellow");
-//let p2 = new player(8,12,32,32, "red");
+let entidades=[];
+let p1 = new player(12,12,24,24,"yellow","imgs/marcos.bmp");
+let p2 = new player(8,12,15,15, "pink","imgs/nicoli.bmp");
+let p3 = new player(8,15,15,10, "pink","imgs/cachorro.png");
+
 
 let textura = new Image();
-SetImage(textura, "./imgs/parede.bmp")
+SetImage(textura, "./imgs/parede.bmp");
+
 
 setInterval(function(){
     clear();
+
+    movimento(p1,"w","s","d","a");
+    movimento(p1,"W","S","D","A");
+    movimento(p2,"ArrowUp","ArrowDown","ArrowRight","ArrowLeft");
+    movimento(p3,"i","k","l","j");
+
+    vision(p1, entidades, 0, 0, w_border, h_border, fov, res )
+
     //drawInGrid(blocks);
-    //draw(p1);
-    //draw(p2);
-    
-    movimento(p1);
-    //movimento(p2);
-    
-    rayCasting(p1, 0, 0, w_border, h_border, fov, res );
+    //draw2d(p1);
+    //draw2d(p2);
+    //draw2d(p3);
+    //drawdir(p1);
+
 }, frames);
+
+
 
 document.addEventListener('keydown', (event) => {
     teclado[event.key] = true;
 
-    if(event.key=="o")fov += A;
-    else if(event.key=="p")fov -= A;
+    if(event.key=="o"){fov += A;console.log(fov)}
+    else if(event.key=="p"){fov -= A;console.log(fov)}
 
-    if(event.key=="k")res += 1;
-    else if(event.key=="l")if(res>1)res -= 1;
+    if(event.key=="k"){if(res>=textura.width)res = textura.width;else res += 1;console.log(res)}
+    else if(event.key=="l"){if(res>1)res -= 1;console.log(res)}
  });
  
 document.addEventListener('keyup', (event) => {
