@@ -31,7 +31,7 @@ setInterval(function(){
     movimento(p1,"w","s","d","a");
     movimento(p1,"W","S","D","A");
     movimento(p2,"ArrowUp","ArrowDown","ArrowRight","ArrowLeft");
-    movimento(p3,"i","k","l","j");
+    movimento(p3,"y","h","j","g");
 
     vision(p1, entidades, 0, 0, w_border, h_border, fov, res )
 
