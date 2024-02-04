@@ -15,7 +15,12 @@ let fov= 90*A;
 let res=1;
 
 let blocks = createMap();
-let entidades=[];
+let entidades={
+    player:[],
+    particle:[],
+    enemy:[]
+};
+
 let p1 = new player(12,12,24,24,"yellow","imgs/marcos.bmp");
 let p2 = new player(8,12,15,15, "pink","imgs/nicoli.bmp");
 let p3 = new player(8,15,15,10, "pink","imgs/cachorro.png");
@@ -36,10 +41,12 @@ setInterval(function(){
     vision(p1, entidades, 0, 0, w_border, h_border, fov, res )
 
     //drawInGrid(blocks);
-    //draw2d(p1);
-    //draw2d(p2);
-    //draw2d(p3);
-    //drawdir(p1);
+    draw2d(p1);
+    draw2d(p2);
+    draw2d(p3);
+    drawdir(p1);
+    drawdir(p2);
+    drawdir(p3);
 
 }, frames);
 

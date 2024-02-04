@@ -78,15 +78,14 @@ function clear(){
 
 function drawdir(p){
     context.fillStyle="red"
-    context.fillRect(
-        (p.x+p.larg/2-5/RESIZE)*RESIZE+Math.cos(p.ang)*15,
-        (p.y+p.larg/2-5/RESIZE)*RESIZE+Math.sin(p.ang)*15,
-        10,10);
-        context.fillStyle="pink"
-        context.fillRect(
-            (p.x+p.larg/2)*RESIZE+Math.cos(p.ang)*30,
-            (p.y+p.larg/2)*RESIZE+Math.sin(p.ang)*30,
-            1,1);
+    //context.fillRect((p.x+p.larg/2-5/RESIZE)*RESIZE+Math.cos(p.ang)*15,(p.y+p.larg/2-5/RESIZE)*RESIZE+Math.sin(p.ang)*15,10,10);
+
+        context.beginPath();
+        context.strokeStyle = "rgb(44, 222, 92)";
+        context.lineWidth = 1;
+        context.moveTo( (p.x+p.larg/2   )*RESIZE, (p.y+p.larg/2)*RESIZE);
+        context.lineTo((p.x+p.larg/2)*RESIZE+Math.cos(p.ang)*30,(p.y+p.larg/2)*RESIZE+Math.sin(p.ang)*30);
+        context.stroke();
 }
 
 

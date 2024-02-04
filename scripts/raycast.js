@@ -3,9 +3,15 @@ function vision(p, entidade, x, y, width, height, fov, res){
     let lista = [];
 
     rayCasting(p, fov, width, res, lista);
-    sprites(p, entidade, fov, lista);
+    sprites(p, entidade.player, lista);
+    sprites(p, entidade.particle, lista);
+    sprites(p, entidade.enemy, lista);
+
+    
 
     draw(lista, x, y, width, height, fov, res);
+
+    //rayCasting(p, fov, width, res, lista);
 }
 
 function rayCasting(p, fov, width, res, lista){
@@ -78,7 +84,6 @@ function rayCast(ang, p, i){
 
 function draw(lista, x, y, width, height, fov, res){
     skyground(x, y, width, height);
-
     lista.sort((a,b) => b.dist - a.dist)
 
     let imgOffSet;
@@ -94,10 +99,10 @@ function draw(lista, x, y, width, height, fov, res){
             else{
                 imgOffSet = item.x - Math.floor(item.x);
             }
-            context.drawImage(textura, Math.floor(imgOffSet*textura.width),0, res,textura.height, item.pos*res,height/2-tam/2, res,tam);
+            context.drawImage(textura, Math.floor(imgOffSet*textura.width),0, res, x + textura.height, y + item.pos*res,height/2-tam/2, res,tam);
         }
         else{
-            context.drawImage(item.img, 0,0, item.img.width,item.img.height, width/2+width*item.ang/fov, height/2-tam/2, tam, tam);
+            context.drawImage(item.img, 0,0, item.img.width,item.img.height, x + width/2+width*item.ang/fov - width/item.dist/4, y + height/2-tam/2, tam, tam);
         }
 
     });
@@ -121,7 +126,7 @@ function draw_ray(ray, p){
     context.stroke();
 }
 
-function sprites(p, entidade, fov, lista){
+function sprites(p, entidade, lista){
     let x;
     let y;
     let dist;

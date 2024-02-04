@@ -15,13 +15,13 @@ class player extends obj{
         this.img = new Image();
         SetImage(this.img, img);
 
-        entidades.push(this);
+        entidades.player.push(this);
     }
     ang = 0;
     torque = 2*A;
     vel = 0.1;
-    
 }
+
 
 class Ray extends obj{
     constructor(x, y){
@@ -33,8 +33,8 @@ class Ray extends obj{
 
 class Sprite{
     constructor(larg,img,dist,ang){
-        this.larg=larg/32;
-        this.img=img;
+        this.larg = larg;
+        this.img = img;
         this.dist = dist;
         this.ang = ang;
 
