@@ -3,22 +3,7 @@ function colisao(movel,obj_lista){
 }
 
 function colisao_area(p1,l1,p2,l2){
-    if(l1<=l2){
-        if( ( (p1.x > p2.x && p1.x < p2.x+l2 )||( p1.x+l1 > p2.x && p1.x+l1 < p2.x+l2))
-                    &&
-            ( (p1.y > p2.y && p1.y < p2.y+l2 )||( p1.y+l1 > p2.y && p1.y+l1 < p2.y+l2)) )
-            return true;
-        else 
-            return false;
-    }
-    else{
-        if( ( (p2.x > p1.x && p2.x < p1.x+l1 )||( p2.x+l2 > p1.x && p2.x+l2 < p1.x+l1))
-                &&
-            ( (p2.y > p1.y && p2.y < p1.y+l1 )||( p2.y+l2 > p1.y && p2.y+l2 < p1.y+l1)) )
-            return true;
-        else 
-            return false;
-    }
+        return p1.x < p2.x+l2 && p1.x+l1 > p2.x && p1.y < p2.y+l2 && p1.y+l1 > p2.y
 }
 
 function colisao_ponto(movel,obj_lista){

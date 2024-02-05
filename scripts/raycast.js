@@ -99,7 +99,7 @@ function draw(lista, x, y, width, height, fov, res){
             else{
                 imgOffSet = item.x - Math.floor(item.x);
             }
-            context.drawImage(textura, Math.floor(imgOffSet*textura.width),0, res, x + textura.height, y + item.pos*res,height/2-tam/2, res,tam);
+            context.drawImage(textura, Math.floor(imgOffSet*textura.width),0, res, textura.height, x + item.pos*res, y + height/2-tam/2, res,tam);
         }
         else{
             context.drawImage(item.img, 0,0, item.img.width,item.img.height, x + width/2+width*item.ang/fov - width/item.dist/4, y + height/2-tam/2, tam, tam);

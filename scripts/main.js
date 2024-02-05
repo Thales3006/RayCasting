@@ -5,6 +5,8 @@ let w_border = canvas.width;
 
 //inicial settings
 const RESIZE= 32;
+const MAXVEL= 0.1;
+const ATRITO = 0.1;
 const A = Math.PI/180;
 
 
@@ -33,17 +35,17 @@ SetImage(textura, "./imgs/parede.bmp");
 setInterval(function(){
     clear();
 
-    movimento(p1,"w","s","d","a");
-    movimento(p1,"W","S","D","A");
-    movimento(p2,"ArrowUp","ArrowDown","ArrowRight","ArrowLeft");
-    movimento(p3,"y","h","j","g");
+    movimento(p1,"w","a","s","d");
+    movimento(p1,"W","A","S","D");
+    movimento(p2,"ArrowUp","ArrowLeft","ArrowDown","ArrowRight");
+    movimento(p3,"y","g","h","j");
 
     vision(p1, entidades, 0, 0, w_border, h_border, fov, res )
 
-    //drawInGrid(blocks);
-    draw2d(p1);
-    draw2d(p2);
-    draw2d(p3);
+    drawInGrid(blocks);
+    drawInGrid(p1);
+    drawInGrid(p2);
+    drawInGrid(p3);
     drawdir(p1);
     drawdir(p2);
     drawdir(p3);

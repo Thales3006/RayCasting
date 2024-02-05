@@ -20,6 +20,7 @@ class player extends obj{
     ang = 0;
     torque = 2*A;
     vel = 0.1;
+    ace = 0.001;
 }
 
 

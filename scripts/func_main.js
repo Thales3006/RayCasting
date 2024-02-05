@@ -58,17 +58,19 @@ function teclas(){
     teclado["ArrowLeft"]=false;
 }
 
-function drawInGrid(array){
-    context.fillStyle="brown";
-    for(let i = 0; i < array.length;i++){
-        context.fillRect(array[i].x*RESIZE,array[i].y*RESIZE,RESIZE,RESIZE);
+function drawInGrid(item){
+    if(!(item instanceof player)){
+        context.fillStyle="brown";
+        for(let i = 0; i < item.length;i++){
+            context.fillRect(item[i].x*RESIZE,item[i].y*RESIZE,RESIZE,RESIZE);
 
+        }
     }
-}
+    else{
+        context.fillStyle = item.cor;
+        context.fillRect(item.x*RESIZE,item.y*RESIZE,item.larg*RESIZE,item.larg*RESIZE);
+    }
 
-function draw2d(coisa){
-    context.fillStyle = coisa.cor;
-    context.fillRect(coisa.x*RESIZE,coisa.y*RESIZE,coisa.larg*RESIZE,coisa.larg*RESIZE);
 }
 
 function clear(){
@@ -77,19 +79,16 @@ function clear(){
 }
 
 function drawdir(p){
-    context.fillStyle="red"
-    //context.fillRect((p.x+p.larg/2-5/RESIZE)*RESIZE+Math.cos(p.ang)*15,(p.y+p.larg/2-5/RESIZE)*RESIZE+Math.sin(p.ang)*15,10,10);
-
         context.beginPath();
         context.strokeStyle = "rgb(44, 222, 92)";
         context.lineWidth = 1;
-        context.moveTo( (p.x+p.larg/2   )*RESIZE, (p.y+p.larg/2)*RESIZE);
+        context.moveTo( (p.x+p.larg/2)*RESIZE, (p.y+p.larg/2)*RESIZE);
         context.lineTo((p.x+p.larg/2)*RESIZE+Math.cos(p.ang)*30,(p.y+p.larg/2)*RESIZE+Math.sin(p.ang)*30);
         context.stroke();
 }
 
 
-function movimento(movel, up, down, right, left){
+function movimento(movel, up, left, down, right){
     let x=movel.x;
     let y=movel.y;
     
@@ -103,6 +102,20 @@ function movimento(movel, up, down, right, left){
         movel.ang+=movel.torque;
 
         if(movel.ang>=Math.PI*2) movel.ang = movel.ang % (Math.PI*2);
+    }
+    
+    if(teclado[up]){
+        movel.x += movel.vel*Math.cos(movel.ang);
+
+        if((i=colisao(movel,blocks))!=-1){
+            movel.x = x;
+            movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
+        }
+        movel.y += movel.vel*Math.sin(movel.ang);
+        if((i=colisao(movel,blocks))!=-1){
+            movel.y = y;
+            movel.y += dist(movel.y, movel.larg, blocks[i].y, 1);
+        }
     }
 
     if(teclado[down]){
@@ -120,17 +133,32 @@ function movimento(movel, up, down, right, left){
 
     }
 
-    if(teclado[up]){
-        movel.x += movel.vel*Math.cos(movel.ang);
+    /*
+           if(teclado[up]&&movel.vel<MAXVEL){
+        movel.vel += movel.ace;
 
-        if((i=colisao(movel,blocks))!=-1){
-            movel.x = x;
-            movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
-        }
-        movel.y += movel.vel*Math.sin(movel.ang);
-        if((i=colisao(movel,blocks))!=-1){
-            movel.y = y;
-            movel.y += dist(movel.y, movel.larg, blocks[i].y, 1);
-        }
     }
+
+    if(teclado[down]&&movel.vel>-MAXVEL){
+        movel.vel-= movel.ace;
+    }
+
+    movel.x += movel.vel*Math.cos(movel.ang);
+
+    if((i=colisao(movel,blocks))!=-1){
+        movel.x = x;
+        //movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
+    }
+    movel.y += movel.vel*Math.sin(movel.ang);
+    
+    if((i=colisao(movel,blocks))!=-1){
+        movel.y = y;
+        //movel.y += dist(movel.y, movel.larg, blocks[i].y, 1);
+    }
+
+    if(movel.vel>0)
+       movel.vel -= movel.ace/3
+    else if(movel.vel<0)
+       movel.vel += movel.ace/3
+    */
 }
