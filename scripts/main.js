@@ -23,9 +23,9 @@ let entidades={
     enemy:[]
 };
 
-let p1 = new player(12,12,24,24,"yellow","imgs/marcos.bmp");
-let p2 = new player(8,12,15,15, "pink","imgs/nicoli.bmp");
-let p3 = new player(8,15,15,10, "pink","imgs/cachorro.png");
+let p1 = new entity(12,12,0.6,0, "yellow","imgs/marcos.bmp",0);
+let p2 = new entity(8,12,0.5,0, "pink","imgs/nicoli.bmp",0);
+let p3 = new entity(8,15,0.5,0, "pink","imgs/cachorro.png",0);
 
 
 let textura = new Image();
@@ -35,17 +35,19 @@ SetImage(textura, "./imgs/parede.bmp");
 setInterval(function(){
     clear();
 
-    movimento(p1,"w","a","s","d");
-    movimento(p1,"W","A","S","D");
-    movimento(p2,"ArrowUp","ArrowLeft","ArrowDown","ArrowRight");
-    movimento(p3,"y","g","h","j");
+    movimento(p1,"w","a","s","d"," ");
+    movimento(p1,"W","A","S","D","");
+    movimento(p2,"ArrowUp","ArrowLeft","ArrowDown","ArrowRight","");
+    movimento(p3,"y","g","h","j","");
+
+    particlemov(entidades.particle)
 
     vision(p1, entidades, 0, 0, w_border, h_border, fov, res )
 
     drawInGrid(blocks);
-    drawInGrid(p1);
-    drawInGrid(p2);
-    drawInGrid(p3);
+    drawInGrid(entidades.player);
+    drawInGrid(entidades.enemy);
+    drawInGrid(entidades.particle);
     drawdir(p1);
     drawdir(p2);
     drawdir(p3);

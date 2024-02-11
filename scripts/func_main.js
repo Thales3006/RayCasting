@@ -59,18 +59,19 @@ function teclas(){
 }
 
 function drawInGrid(item){
-    if(!(item instanceof player)){
+    if(item[0] instanceof entity){
+        for(let i = 0; i < item.length;i++){
+            context.fillStyle = item[i].cor;
+            context.fillRect(item[i].x*RESIZE,item[i].y*RESIZE,item[i].larg*RESIZE,item[i].larg*RESIZE);
+        }
+    }
+    else if(item[0] instanceof obj){
         context.fillStyle="brown";
         for(let i = 0; i < item.length;i++){
             context.fillRect(item[i].x*RESIZE,item[i].y*RESIZE,RESIZE,RESIZE);
 
         }
     }
-    else{
-        context.fillStyle = item.cor;
-        context.fillRect(item.x*RESIZE,item.y*RESIZE,item.larg*RESIZE,item.larg*RESIZE);
-    }
-
 }
 
 function clear(){
@@ -87,8 +88,36 @@ function drawdir(p){
         context.stroke();
 }
 
+function particlemov(particles){
+    particles.forEach(item => {
+        x = item.x;
+        y = item.y;
 
-function movimento(movel, up, left, down, right){
+        item.x += item.vel*Math.cos(item.ang);
+
+        if((i=colisao(item,blocks))!=-1){
+            item.x = x;
+            item.x += dist(item.x, item.larg, blocks[i].x, 1);
+        }
+        if((i=colisao_entidade(item,entidades.player))!=-1){   
+            item.x = x;
+            item.x += dist(item.x, item.larg, entidades.player[i].x, entidades.player[i].larg);
+        }
+        
+        item.y += item.vel*Math.sin(item.ang);
+
+        if((i=colisao(item,blocks))!=-1){
+            item.y = y;
+            item.y += dist(item.y, item.larg, blocks[i].y, 1);
+        }
+        if((i=colisao_entidade(item,entidades.player))!=-1){
+            item.y = y;
+            item.y += dist(item.y, item.larg, entidades.player[i].y, entidades.player[i].larg);
+        }
+    })
+}
+
+function movimento(movel, up, left, down, right,shoot){
     let x=movel.x;
     let y=movel.y;
     
@@ -111,10 +140,19 @@ function movimento(movel, up, left, down, right){
             movel.x = x;
             movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
         }
+        if((i=colisao_entidade(movel,entidades.player))!=-1){   
+            movel.x = x;
+            movel.x += dist(movel.x, movel.larg, entidades.player[i].x, entidades.player[i].larg);
+        }
+        
         movel.y += movel.vel*Math.sin(movel.ang);
         if((i=colisao(movel,blocks))!=-1){
             movel.y = y;
             movel.y += dist(movel.y, movel.larg, blocks[i].y, 1);
+        }
+        if((i=colisao_entidade(movel,entidades.player))!=-1){
+            movel.y = y;
+            movel.y += dist(movel.y, movel.larg, entidades.player[i].y, entidades.player[i].larg);
         }
     }
 
@@ -125,12 +163,24 @@ function movimento(movel, up, left, down, right){
             movel.x=x;
             movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
         }
+        if((i=colisao_entidade(movel,entidades.player))!=-1){   
+            movel.x = x;
+            movel.x += dist(movel.x, movel.larg, entidades.player[i].x, entidades.player[i].larg);
+        }
+
         movel.y-= movel.vel*Math.sin(movel.ang);
         if((i=colisao(movel,blocks))!=-1){
             movel.y = y;
             movel.y += dist(movel.y, movel.larg, blocks[i].y, 1);
         }
+        if((i=colisao_entidade(movel,entidades.player))!=-1){
+            movel.y = y;
+            movel.y += dist(movel.y, movel.larg, entidades.player[i].y, entidades.player[i].larg);
+        }
+    }
 
+    if(teclado[shoot]){
+        new entity (movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.2, movel.ang, "red", "imgs/tiro.bmp", 2)
     }
 
     /*

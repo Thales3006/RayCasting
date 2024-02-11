@@ -5,19 +5,22 @@ class obj{
     }
 }
 
-class player extends obj{
-    constructor(x,y,larg,alt,cor,img){
+class entity extends obj{
+    constructor(x,y,larg,ang,cor,img, lista){
         super(x,y);
-        this.larg=larg/32;
-        this.alt=alt/32;
+        this.larg=larg;
         this.cor=cor;
+        this.ang=ang;
 
         this.img = new Image();
         SetImage(this.img, img);
 
-        entidades.player.push(this);
+        switch(lista){
+            case 0: entidades.player.push(this); break;
+            case 1: entidades.enemy.push(this); break;
+            case 2: entidades.particle.push(this); break;
+        }
     }
-    ang = 0;
     torque = 2*A;
     vel = 0.1;
     ace = 0.001;
