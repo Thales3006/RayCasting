@@ -4,7 +4,7 @@ let h_border = canvas.height;
 let w_border = canvas.width;
 
 //inicial settings
-const RESIZE= 32;
+const RESIZE= 16;
 const MAXVEL= 0.1;
 const ATRITO = 0.1;
 const A = Math.PI/180;
@@ -24,7 +24,7 @@ let entidades={
 };
 
 let p1 = new entity(12,12,0.6,0, "yellow","imgs/marcos.bmp",0);
-let p2 = new entity(8,12,0.5,0, "pink","imgs/nicoli.bmp",0);
+let p2 = new entity(8,12,0.5,0, "pink","imgs/ambaba.bmp",0);
 let p3 = new entity(8,15,0.5,0, "pink","imgs/cachorro.png",0);
 
 

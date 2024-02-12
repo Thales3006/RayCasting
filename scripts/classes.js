@@ -16,14 +16,14 @@ class entity extends obj{
         SetImage(this.img, img);
 
         switch(lista){
-            case 0: entidades.player.push(this); break;
-            case 1: entidades.enemy.push(this); break;
-            case 2: entidades.particle.push(this); break;
+            case 0: entidades.player.push(this); this.vel = 0.1; break;
+            case 1: entidades.enemy.push(this); this.vel = 0.1; break;
+            case 2: entidades.particle.push(this);this.vel = 0.3; break;
         }
     }
     torque = 2*A;
-    vel = 0.1;
     ace = 0.001;
+    atirou = false;
 }
 
 

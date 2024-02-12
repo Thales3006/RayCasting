@@ -89,30 +89,32 @@ function drawdir(p){
 }
 
 function particlemov(particles){
-    particles.forEach(item => {
+    particles.forEach( (item,index) => {
         x = item.x;
         y = item.y;
 
         item.x += item.vel*Math.cos(item.ang);
 
         if((i=colisao(item,blocks))!=-1){
-            item.x = x;
-            item.x += dist(item.x, item.larg, blocks[i].x, 1);
+            particles.splice(index,1)
         }
-        if((i=colisao_entidade(item,entidades.player))!=-1){   
-            item.x = x;
-            item.x += dist(item.x, item.larg, entidades.player[i].x, entidades.player[i].larg);
+        else if((i=colisao_entidade(item,entidades.player))!=-1){   
+            entidades.player.splice(i,1)
+        }
+        else if((i=colisao_entidade(item,entidades.enemy))!=-1){   
+            entidades.enemy.splice(i,1)
         }
         
         item.y += item.vel*Math.sin(item.ang);
 
         if((i=colisao(item,blocks))!=-1){
-            item.y = y;
-            item.y += dist(item.y, item.larg, blocks[i].y, 1);
+            particles.splice(index,1)
         }
-        if((i=colisao_entidade(item,entidades.player))!=-1){
-            item.y = y;
-            item.y += dist(item.y, item.larg, entidades.player[i].y, entidades.player[i].larg);
+        else if((i=colisao_entidade(item,entidades.player))!=-1){
+            entidades.player.splice(i,1)
+        }
+        else if((i=colisao_entidade(item,entidades.enemy))!=-1){   
+            entidades.enemy.splice(i,1)
         }
     })
 }
@@ -140,9 +142,13 @@ function movimento(movel, up, left, down, right,shoot){
             movel.x = x;
             movel.x += dist(movel.x, movel.larg, blocks[i].x, 1);
         }
-        if((i=colisao_entidade(movel,entidades.player))!=-1){   
+        else if((i=colisao_entidade(movel,entidades.player))!=-1){   
             movel.x = x;
             movel.x += dist(movel.x, movel.larg, entidades.player[i].x, entidades.player[i].larg);
+        }
+        else if((i=colisao_entidade(movel,entidades.enemy))!=-1){   
+            movel.x = x;
+            movel.x += dist(movel.x, movel.larg, entidades.enemy[i].x, entidades.enemy[i].larg);
         }
         
         movel.y += movel.vel*Math.sin(movel.ang);
@@ -150,9 +156,13 @@ function movimento(movel, up, left, down, right,shoot){
             movel.y = y;
             movel.y += dist(movel.y, movel.larg, blocks[i].y, 1);
         }
-        if((i=colisao_entidade(movel,entidades.player))!=-1){
+        else if((i=colisao_entidade(movel,entidades.player))!=-1){
             movel.y = y;
             movel.y += dist(movel.y, movel.larg, entidades.player[i].y, entidades.player[i].larg);
+        }
+        else if((i=colisao_entidade(movel,entidades.enemy))!=-1){   
+            movel.x = x;
+            movel.x += dist(movel.x, movel.larg, entidades.enemy[i].x, entidades.enemy[i].larg);
         }
     }
 
@@ -180,7 +190,11 @@ function movimento(movel, up, left, down, right,shoot){
     }
 
     if(teclado[shoot]){
-        new entity (movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.2, movel.ang, "red", "imgs/tiro.bmp", 2)
+        if(!movel.atirou){
+            new entity (movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.2, movel.ang, "red", "imgs/tiro.bmp", 2)
+            movel.atirou=true;
+            setTimeout( () => movel.atirou = false, 250);
+        }
     }
 
     /*
