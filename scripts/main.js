@@ -23,9 +23,9 @@ let entidades={
     enemy:[]
 };
 
-let p1 = new entity(12,12,0.6,0, "yellow","imgs/marcos.bmp",0);
-let p2 = new entity(8,12,0.5,0, "pink","imgs/ambaba.bmp",0);
-let p3 = new entity(8,15,0.5,0, "pink","imgs/cachorro.png",0);
+let p1 = new Player(12,12,0.6,0, "yellow","imgs/marcos.bmp");
+let p2 = new Player(8,12,0.5,0, "pink","imgs/ambaba.bmp");
+let p3 = new Player(8,15,0.5,0, "pink","imgs/cachorro.png");
 
 
 let textura = new Image();
@@ -37,8 +37,8 @@ setInterval(function(){
 
     movimento(p1,"w","a","s","d"," ");
     movimento(p1,"W","A","S","D","");
-    movimento(p2,"ArrowUp","ArrowLeft","ArrowDown","ArrowRight","");
-    movimento(p3,"y","g","h","j","");
+    movimento(p2,"ArrowUp","ArrowLeft","ArrowDown","ArrowRight","Control");
+    movimento(p3,"y","g","h","j","t");
 
     particlemov(entidades.particle)
 

@@ -5,8 +5,8 @@ class obj{
     }
 }
 
-class entity extends obj{
-    constructor(x,y,larg,ang,cor,img, lista){
+class Player extends obj{
+    constructor(x,y,larg,ang,cor,img){
         super(x,y);
         this.larg=larg;
         this.cor=cor;
@@ -15,17 +15,45 @@ class entity extends obj{
         this.img = new Image();
         SetImage(this.img, img);
 
-        switch(lista){
-            case 0: entidades.player.push(this); this.vel = 0.1; break;
-            case 1: entidades.enemy.push(this); this.vel = 0.1; break;
-            case 2: entidades.particle.push(this);this.vel = 0.3; break;
-        }
+        entidades.player.push(this);
     }
     torque = 2*A;
-    ace = 0.001;
+    vel = 0.1;
     atirou = false;
 }
 
+class Particle extends obj{
+    constructor(x,y,larg,ang,cor,img){
+        super(x,y);
+        this.larg=larg;
+        this.cor=cor;
+        this.ang=ang;
+
+        this.img = new Image();
+        SetImage(this.img, img);
+
+        entidades.particle.push(this);
+    }
+    torque = 2*A;
+    vel = 0.3;
+}
+
+class Enemy extends obj{
+    constructor(x,y,larg,ang,cor,img){
+        super(x,y);
+        this.larg=larg;
+        this.cor=cor;
+        this.ang=ang;
+
+        this.img = new Image();
+        SetImage(this.img, img);
+
+        entidades.enemy.push(this);
+    }
+    torque = 2*A;
+    vel = 0.1;
+    atirou = false;
+}
 
 class Ray extends obj{
     constructor(x, y){

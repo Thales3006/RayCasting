@@ -59,7 +59,7 @@ function teclas(){
 }
 
 function drawInGrid(item){
-    if(item[0] instanceof entity){
+    if(item[0] instanceof Player ||item[0] instanceof Particle || item[0] instanceof Enemy){
         for(let i = 0; i < item.length;i++){
             context.fillStyle = item[i].cor;
             context.fillRect(item[i].x*RESIZE,item[i].y*RESIZE,item[i].larg*RESIZE,item[i].larg*RESIZE);
@@ -191,9 +191,9 @@ function movimento(movel, up, left, down, right,shoot){
 
     if(teclado[shoot]){
         if(!movel.atirou){
-            new entity (movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.2, movel.ang, "red", "imgs/tiro.bmp", 2)
+            new Particle(movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.1, movel.ang, "red", "imgs/tiro.bmp")
             movel.atirou=true;
-            setTimeout( () => movel.atirou = false, 250);
+            setTimeout( () => movel.atirou = false, 500);
         }
     }
 
