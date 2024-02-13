@@ -35,6 +35,15 @@ function createMap(){
     return array
 }
 
+function enemigos(array){
+    array.push(new Enemy(4.5,5,0.5,"imgs/guy.png"))
+    array.push(new Enemy(6,5,0.5,"imgs/guy.png"))
+    array.push(new Enemy(4.5,7,0.5,"imgs/guy.png"))
+    array.push(new Enemy(8,8,0.5,"imgs/guy.png"))
+    array.push(new Enemy(14,8.5,0.5,"imgs/guy.png"))
+    array.push(new Enemy(12.5,5.4,0.5,"imgs/guy.png"))
+}
+
 function SetImage(img, endereco){
     img.onload = function() {
         img.width= this.width;
@@ -60,6 +69,13 @@ function teclas(){
 
 function drawInGrid(item){
     if(item[0] instanceof Player ||item[0] instanceof Particle || item[0] instanceof Enemy){
+        if(item[0] instanceof Player)
+            context.fillStyle = "pink";
+        else if(item[0] instanceof Particle)
+            context.fillStyle = "yellow";
+        else if(item[0] instanceof Enemy)
+            context.fillStyle = "red";
+
         for(let i = 0; i < item.length;i++){
             context.fillStyle = item[i].cor;
             context.fillRect(item[i].x*RESIZE,item[i].y*RESIZE,item[i].larg*RESIZE,item[i].larg*RESIZE);
@@ -79,13 +95,15 @@ function clear(){
     context.fillRect(0,0,w_border,h_border);
 }
 
-function drawdir(p){
+function drawdir(array){
+    array.forEach( p => {
         context.beginPath();
         context.strokeStyle = "rgb(44, 222, 92)";
         context.lineWidth = 1;
         context.moveTo( (p.x+p.larg/2)*RESIZE, (p.y+p.larg/2)*RESIZE);
         context.lineTo((p.x+p.larg/2)*RESIZE+Math.cos(p.ang)*30,(p.y+p.larg/2)*RESIZE+Math.sin(p.ang)*30);
         context.stroke();
+    });
 }
 
 function particlemov(particles){
@@ -191,7 +209,7 @@ function movimento(movel, up, left, down, right,shoot){
 
     if(teclado[shoot]){
         if(!movel.atirou){
-            new Particle(movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.1, movel.ang, "red", "imgs/tiro.bmp")
+            new Particle(movel.x+movel.larg/2+Math.cos(movel.ang)*movel.larg-0.2/2, movel.y+movel.larg/2+Math.sin(movel.ang)*movel.larg-0.2/2, 0.1, movel.ang, "imgs/tiro.bmp")
             movel.atirou=true;
             setTimeout( () => movel.atirou = false, 500);
         }

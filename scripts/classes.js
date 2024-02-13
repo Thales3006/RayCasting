@@ -6,10 +6,9 @@ class obj{
 }
 
 class Player extends obj{
-    constructor(x,y,larg,ang,cor,img){
+    constructor(x,y,larg,ang,img){
         super(x,y);
         this.larg=larg;
-        this.cor=cor;
         this.ang=ang;
 
         this.img = new Image();
@@ -19,14 +18,14 @@ class Player extends obj{
     }
     torque = 2*A;
     vel = 0.1;
+    vivo = true;
     atirou = false;
 }
 
 class Particle extends obj{
-    constructor(x,y,larg,ang,cor,img){
+    constructor(x,y,larg,ang,img){
         super(x,y);
         this.larg=larg;
-        this.cor=cor;
         this.ang=ang;
 
         this.img = new Image();
@@ -39,11 +38,10 @@ class Particle extends obj{
 }
 
 class Enemy extends obj{
-    constructor(x,y,larg,ang,cor,img){
+    constructor(x,y,larg,img){
         super(x,y);
         this.larg=larg;
-        this.cor=cor;
-        this.ang=ang;
+        this.ang=0;
 
         this.img = new Image();
         SetImage(this.img, img);
