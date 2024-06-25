@@ -1,7 +1,7 @@
 # RayCasting
 Um experimento de raycasting simples
 
-É um shooter inspirado nos primeiros jogos de Wolfenstein.
+É um experimento de shooter inspirado na técnica de raycasting dos primeiros jogos de Wolfenstein.
 O objetivo desse projeto é conseguir aplicar as técnicas de rayscasting
 em um mapa com uma grid e entender um pouco mais de javascript no processo
 
