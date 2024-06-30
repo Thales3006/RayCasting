@@ -74,7 +74,7 @@ document.addEventListener('keydown', (event) => {
     //if(event.key=="k"){if(res>=textura.width)res = textura.width;else res += 1;console.log(res)}
     //else if(event.key=="l"){if(res>1)res -= 1;console.log(res)}
 
-    if(event.key=="n"){cameraIndex++; if(cameraIndex>entidades.player.length)cameraIndex=0;}
+    if(event.key=="n"){cameraIndex++; if(cameraIndex>entidades.player.length-1)cameraIndex=0;}
     else if(event.key=="m"){cameraIndex--;if(cameraIndex<0)cameraIndex=entidades.player.length-1;}
  });
  
