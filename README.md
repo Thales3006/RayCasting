@@ -11,4 +11,4 @@ Um experimento de raycasting simples.
 O objetivo desse projeto é conseguir aplicar as técnicas de rayscasting
 em um mapa com uma grid e, mesmo que não seja o melhor projeto para isso, entender um pouco mais de javascript no processo.
 
-![plot](./imgs/readimg.png)
+![plot](./imgs/readmeimg.png)
