@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gridformer</title>
     <style>
-        body{
+        html{
+            margin: 0;
+            height: 100%;
             font-family: "Lucida Console", "Courier New", monospace;
             font-size: 25px;
-            color:rgb(255, 255, 255);
+            color: rgb(250, 221, 185);
             text-align: center;
             background-color: rgb(109, 93, 73);
+            background-image: linear-gradient(rgb(129, 107, 79), rgb(56, 47, 36));
+        }
+        #texto{
+            font-size: 30px;
         }
         canvas{
             
@@ -20,17 +26,23 @@
     </style>
 </head>
 <body>
+    <div id="texto">
+        Objetivo: Mate TUDO
+    </div>
 
     <canvas id="canvas" height="544" width="1080"></canvas>
+    <div id="keys">
+        <p>
+            Player 1 - w a s d<br>
+            Player 2 - y g h j<br>
+            Player 3 - ↑ ← ↓ →<br>
+            <br>
+            Change FOV - o p
+        </p>
+    </div>
+    <div c="final">
 
-    <p>
-        Player 1 - w a s d<br>
-        Player 2 - y g h j<br>
-        Player 3 - ↑ ← ↓ →<br>
-    </p>
-    <p>
-        Change FOV - o p
-    </p>
+    </div>
 <br>
     <script src="scripts/classes.js"></script>
     <script src="scripts/func_main.js"></script>
