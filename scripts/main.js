@@ -3,6 +3,8 @@ let context = canvas.getContext("2d");
 let h_border = canvas.height;
 let w_border = canvas.width;
 
+context.imageSmoothingEnabled = false; 
+
 //inicial settings
 const RESIZE= 16;
 const A = Math.PI/180;
@@ -15,6 +17,7 @@ let texto = document.getElementById("texto");
 
 let fov= 90*A;
 let res=1;
+let cameraIndex=0
 
 let blocks = createMap();
 let entidades={
@@ -33,6 +36,7 @@ enemigos(entidades.enemy);
 let textura = new Image();
 SetImage(textura, "./imgs/parede.bmp");
 
+
 setInterval(function(){
     clear();
 
@@ -43,7 +47,7 @@ setInterval(function(){
 
     particlemov(entidades.particle)
 
-    vision(p1, entidades, 0, 0, w_border, h_border, fov, res )
+    vision(entidades.player[cameraIndex], entidades, 0, 0, w_border, h_border, fov, res )
 
     drawInGrid(blocks);
     drawInGrid(entidades.player);
@@ -53,7 +57,7 @@ setInterval(function(){
     drawdir(entidades.enemy);
 
     if(entidades.enemy.length==0 && entidades.player.length<=1 && venceu == false){
-        texto.innerHTML = "Parabéns! Você matou TUDO";
+        texto.innerHTML = "Congratulations! You killed EVERYTHING";
         venceu = true;
     }
 
@@ -67,8 +71,11 @@ document.addEventListener('keydown', (event) => {
     if(event.key=="o"){fov += A;console.log(fov)}
     else if(event.key=="p"){fov -= A;console.log(fov)}
 
-    if(event.key=="k"){if(res>=textura.width)res = textura.width;else res += 1;console.log(res)}
-    else if(event.key=="l"){if(res>1)res -= 1;console.log(res)}
+    //if(event.key=="k"){if(res>=textura.width)res = textura.width;else res += 1;console.log(res)}
+    //else if(event.key=="l"){if(res>1)res -= 1;console.log(res)}
+
+    if(event.key=="n"){cameraIndex++; if(cameraIndex>entidades.player.length)cameraIndex=0;}
+    else if(event.key=="m"){cameraIndex--;if(cameraIndex<0)cameraIndex=entidades.player.length-1;}
  });
  
 document.addEventListener('keyup', (event) => {

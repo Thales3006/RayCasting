@@ -10,8 +10,6 @@ function vision(p, entidade, x, y, width, height, fov, res){
     
 
     draw(lista, x, y, width, height, fov, res);
-
-    //rayCasting(p, fov, width, res, lista);
 }
 
 function rayCasting(p, fov, width, res, lista){
@@ -100,20 +98,40 @@ function draw(lista, x, y, width, height, fov, res){
                 imgOffSet = item.x - Math.floor(item.x);
             }
             context.drawImage(textura, Math.floor(imgOffSet*textura.width),0, res, textura.height, x + item.pos*res, y + height/2-tam/2, res,tam);
+            let a = item.dist/20
+
+            context.fillStyle = "rgba(0,0,0," + item.dist/30 + ")";
+            context.fillRect(x + item.pos*res, y + height/2-tam/2, res,tam);
         }
         else{
-            context.drawImage(item.img, 0,0, item.img.width,item.img.height, x + width/2+width*item.ang/fov - width/item.dist/4, y + height/2-tam/2, tam, tam);
+            context.drawImage(item.img, x + width/2+width*item.ang/fov - width/item.dist/4, y + height/2-tam/2, tam, tam); // 0,0, item.img.width,item.img.height
+
+            //context.fillStyle = "rgba(0,0,0," + item.dist/20 + ")";
+            //context.fillRect(x + width/2+width*item.ang/fov - width/item.dist/4, y + height/2-tam/2, tam, tam);
         }
+
 
     });
 
 }
 
 function skyground(x, y, width, height){
-    context.fillStyle="rgb(150, 117, 59)";//chao
+
+    const ground = context.createLinearGradient(0, height/2, 0, height);
+    const roof = context.createLinearGradient(0, 0, 0, height/2);
+
+    ground.addColorStop(0, "rgb(65, 50, 40)");
+    ground.addColorStop(1, "rgb(150, 117, 59)");
+
+    roof.addColorStop(0, "rgb(89, 83, 80)");
+    roof.addColorStop(1, "rgb(49, 43, 40)");
+
+    context.fillStyle = ground; // chao
     context.fillRect(x, y + height/2, width, height/2);
 
-    context.fillStyle="rgb(79, 73, 70)";//ceu
+
+
+    context.fillStyle = roof;//ceu
     context.fillRect(x, y, width, height/2);
 }
 
