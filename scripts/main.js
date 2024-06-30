@@ -11,6 +11,7 @@ const A = Math.PI/180;
 let teclado=[]; teclas();
 let frames=16;
 let venceu = false;
+let texto = document.getElementById("texto");
 
 let fov= 90*A;
 let res=1;
@@ -32,8 +33,6 @@ enemigos(entidades.enemy);
 let textura = new Image();
 SetImage(textura, "./imgs/parede.bmp");
 
-window.alert("Mate tudo e todos")
-
 setInterval(function(){
     clear();
 
@@ -54,7 +53,7 @@ setInterval(function(){
     drawdir(entidades.enemy);
 
     if(entidades.enemy.length==0 && entidades.player.length<=1 && venceu == false){
-        window.alert("Parabéns!\n Você matou tudo e todos!")
+        texto.innerHTML = "Parabéns! Você matou TUDO";
         venceu = true;
     }
 
