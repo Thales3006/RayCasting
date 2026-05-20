@@ -5,3 +5,5 @@ It is a shooter game experiment based in the [raycasting](https://pt.wikipedia.o
 
 
 ![plot](./imgs/readmeimg.png)
+
+Thanks.
